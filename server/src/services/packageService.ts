@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { PackageEventInput, Package, PackageStatus } from '../models/package';
+import { Package as PrismaPackage } from '@prisma/client';
 import { createHash } from 'crypto';
 import { io } from '../app';
 
@@ -74,7 +75,7 @@ export async function createPackageEvent(event: PackageEventInput) {
   return { message: 'Event processed', event };
 }
 
-export async function getActivePackages(): Promise<Package[]> {
+export async function getActivePackages(): Promise<PrismaPackage[]> {
   return prisma.package.findMany({
     where: {
       current_status: {
