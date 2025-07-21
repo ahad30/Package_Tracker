@@ -3,8 +3,6 @@ import HomeLayout from "../components/Layout/HomeLayout/HomeLayout";
 import AdminLayout from "../components/Layout/AdminLayout/AdminLayout";
 import HomePage from "../pages/Home/HomePage";
 import AdminHomePage from "../pages/AdminDashboard/AdminHomePage/AdminHomePage";
-import AdminCategoriesPage from "../pages/AdminDashboard/AdminCategoriesPage/AdminCategoriesPage";
-
 const routes = createBrowserRouter([
     // Home routes
     {
@@ -27,10 +25,6 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/admin',
                 element: <AdminHomePage />,
-            },
-            {
-                path: '/dashboard/admin/categories',
-                element: <AdminCategoriesPage />,
             }
         ]
     }
