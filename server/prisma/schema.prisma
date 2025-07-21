@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+enum PackageStatus {
+  CREATED
+  PICKED_UP
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  EXCEPTION
+  CANCELLED
+}
+
+model Package {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  package_id    String   @unique
+  current_status PackageStatus
+  last_updated  DateTime
+  lat           Float?
+  lon           Float?
+  note          String?
+  eta           DateTime?
+  events        PackageEvent[]
+  alerts        Alert[]
+}
+
+model PackageEvent {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  package_id      String
+  status          PackageStatus
+  lat             Float?
+  lon             Float?
+  event_timestamp DateTime
+  received_at     DateTime
+  note            String?
+  eta             DateTime?
+  eventHash       String   @unique
+  package         Package  @relation(fields: [package_id], references: [package_id])
+}
+
+model Alert {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  package_id String
+  message    String
+  created_at DateTime
+  resolved   Boolean  @default(false)
+  package    Package  @relation(fields: [package_id], references: [package_id])
+}
