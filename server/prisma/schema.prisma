@@ -36,8 +36,8 @@ model PackageEvent {
   status          PackageStatus
   lat             Float?
   lon             Float?
-  event_timestamp DateTime
-  received_at     DateTime
+  event_timestamp DateTime @default(now())
+  received_at     DateTime @default(now())
   note            String?
   eta             DateTime?
   eventHash       String   @unique

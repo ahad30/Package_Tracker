@@ -26,8 +26,8 @@ export const getPackages = async (_req: Request, res: Response) => {
 
 export const getPackageDetails = async (req: Request, res: Response) => {
   try {
-    const { packageId } = req.params;
-    const history = await getPackageHistory(packageId);
+    const id  = req.params.id;
+    const history = await getPackageHistory(id);
     res.json(history);
   } catch (error) {
     console.error('Error fetching package details:', error);

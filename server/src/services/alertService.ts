@@ -23,24 +23,34 @@ export async function checkStuckPackages(io: Server) {
         where: { package_id: pkg.package_id, resolved: false },
         orderBy: { created_at: 'desc' },
       });
+     
 
-      const shouldAlert = !lastAlert || 
-        (now.getTime() - lastAlert.created_at.getTime()) / (1000 * 60) > STUCK_THRESHOLD_MINUTES;
+if (!lastAlert) {
+  // First time alert → create
+  const alert = await prisma.alert.create({
+    data: {
+      package_id: pkg.package_id,
+      message: `Package ${pkg.package_id} stuck for ${Math.floor(timeSinceUpdate)} minutes`,
+      created_at: now,
+    },
+  });
+  io.emit('alert', alert);
+} else {
+  // Already exists → update the message only
+  const updatedAlert = await prisma.alert.update({
+    where: { id: lastAlert.id },
+    data: {
+      message: `Package ${pkg.package_id} still stuck for ${Math.floor(timeSinceUpdate)} minutes`,
+    },
+  });
+  io.emit('alert', updatedAlert);
+}
 
-      if (shouldAlert) {
-        const alert = await prisma.alert.create({
-          data: {
-            package_id: pkg.package_id,
-            message: `Package ${pkg.package_id} stuck for ${Math.floor(timeSinceUpdate)} minutes`,
-            created_at: now,
-          },
-        });
-        io.emit('alert', alert);
-      }
+   
     }
   }
 }
 
 export function startAlertCron(io: Server) {
-  cron.schedule('*/5 * * * *', () => checkStuckPackages(io));
+  cron.schedule('*/5 * * * * ', () => checkStuckPackages(io));
 }

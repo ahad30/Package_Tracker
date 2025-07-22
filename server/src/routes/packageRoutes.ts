@@ -3,8 +3,8 @@ import { handlePackageUpdate, getPackages, getPackageDetails } from '../controll
 
 const router = Router();
 
-router.post('/package', handlePackageUpdate);
-router.get('/package', getPackages);
-router.get('/package/:id', getPackageDetails);
+router.post('/packages', handlePackageUpdate);
+router.get('/packages', getPackages);
+router.get('/packages/:id', getPackageDetails);
 
 export default router;

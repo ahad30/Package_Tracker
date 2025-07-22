@@ -5,9 +5,9 @@ import Footer from "../../Common/Footer/Footer";
 const HomeLayout = () => {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <Outlet />
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };

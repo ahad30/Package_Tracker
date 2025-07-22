@@ -16,8 +16,9 @@ export async function createPackageEvent(event: PackageEventInput) {
     return { message: 'Event already processed', event: existingEvent };
   }
 
-  const eventTimestamp = new Date(event.timestamp);
+  const eventTimestamp = new Date();
   const receivedAt = new Date();
+  console.log(eventTimestamp,receivedAt)
 
   const latestEvent = await prisma.package.findUnique({
     where: { package_id: event.package_id },
@@ -88,9 +89,9 @@ export async function getActivePackages(): Promise<PrismaPackage[]> {
   });
 }
 
-export async function getPackageHistory(packageId: string) {
+export async function getPackageHistory(id: string) {
   return prisma.packageEvent.findMany({
-    where: { package_id: packageId },
+    where: { package_id: id },
     orderBy: { event_timestamp: 'asc' },
   });
 }
