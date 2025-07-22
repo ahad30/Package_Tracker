@@ -8,17 +8,18 @@ const prisma = new PrismaClient();
 
 export async function createPackageEvent(event: PackageEventInput) {
   const eventHash = createHash('sha256')
-    .update(`${event.package_id}:${event.status}:${event.timestamp}`)
-    .digest('hex');
+  .update(`${event.package_id}:${event.status}:${event.timestamp}`)
+  .digest('hex');
 
   const existingEvent = await prisma.packageEvent.findUnique({ where: { eventHash } });
+  console.log(existingEvent)
   if (existingEvent) {
     return { message: 'Event already processed', event: existingEvent };
   }
 
-  const eventTimestamp = new Date();
-  const receivedAt = new Date();
-  console.log(eventTimestamp,receivedAt)
+  const eventTimestamp = event.timestamp ? new Date(event.timestamp) : new Date();
+   const receivedAt = new Date();
+
 
   const latestEvent = await prisma.package.findUnique({
     where: { package_id: event.package_id },

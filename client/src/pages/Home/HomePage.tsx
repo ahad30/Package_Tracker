@@ -9,13 +9,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Aamira Package Tracker</h1>
-      <AlertTable />
+      <h1 className="text-2xl font-bold mb-4 text-center">Aamira Package Tracker</h1>
+      <p className="mb-8 text-center">Track and manage your packages efficiently.</p>
       {selectedPackage ? (
         <PackageDetail packages={selectedPackage} onBack={() => setSelectedPackage(null)} />
       ) : (
         <PackageList onSelectPackage={setSelectedPackage} />
       )}
+      <AlertTable />
     </div>
   );
 };

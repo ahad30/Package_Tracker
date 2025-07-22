@@ -21,18 +21,18 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
 
  socket?.on('packageUpdate', (updatedPackage: Package) => {
 
-  if (
-    updatedPackage.current_status !== 'DELIVERED' &&
-    updatedPackage.current_status !== 'CANCELLED'
-  ) {
+  // if (
+  //   updatedPackage.current_status !== 'DELIVERED' &&
+  //   updatedPackage.current_status !== 'CANCELLED'
+  // ) {
     setPackages(prev => {
-      const index = prev.findIndex(p => p.package_id === updatedPackage.package_id);
+     const index = prev.findIndex(p => p.package_id === updatedPackage.package_id);
       if (index >= 0) {
         return [...prev.slice(0, index), updatedPackage, ...prev.slice(index + 1)];
       }
       return [...prev, updatedPackage];
     });
-  }
+  // }
 });
 
 
@@ -48,7 +48,7 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
           <tr>
             <th className="px-4 py-2 border bg-blue-500 text-white">Package ID</th>
             <th className="px-4 py-2 border bg-blue-500 text-white">Status</th>
-            <th className="px-4 py-2 border bg-blue-500 text-white">Last Seen</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">Last Seen/Updated</th>
             <th className="px-4 py-2 border bg-blue-500 text-white">Location</th>
             <th className="px-4 py-2 border bg-blue-500 text-white">ETA</th>
           </tr>

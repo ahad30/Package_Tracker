@@ -32,7 +32,7 @@ model Package {
 
 model PackageEvent {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  package_id      String
+  package_id      String   
   status          PackageStatus
   lat             Float?
   lon             Float?
