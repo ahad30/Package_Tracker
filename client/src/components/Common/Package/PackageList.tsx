@@ -43,14 +43,14 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border-2 border-gray-500">
+      <table className="min-w-full bg-white border border-gray-500">
         <thead>
           <tr>
-            <th className="px-4 py-2 border">Package ID</th>
-            <th className="px-4 py-2 border">Status</th>
-            <th className="px-4 py-2 border">Last Seen</th>
-            <th className="px-4 py-2 border">Location</th>
-            <th className="px-4 py-2 border">ETA</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">Package ID</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">Status</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">Last Seen</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">Location</th>
+            <th className="px-4 py-2 border bg-blue-500 text-white">ETA</th>
           </tr>
         </thead>
         <tbody>
@@ -60,11 +60,17 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
               className={`cursor-pointer ${new Date().getTime() - new Date(pkg.last_updated).getTime() > 30 * 60 * 1000 ? 'bg-red-400' : ''}`}
               onClick={() => onSelectPackage(pkg)}
             >
-              <td className="px-4 py-2 text-center border">{pkg.package_id}</td>
-              <td className="px-4 py-2 border text-center">{pkg.current_status}</td>
-              <td className="px-4 py-2 border text-center">{moment(new Date(pkg.last_updated)).fromNow()}</td>
-              <td className="px-4 py-2 border text-center">{pkg.lat && pkg.lon ? `${pkg.lat}, ${pkg.lon}` : '—'}</td>
-              <td className="px-4 py-2 border text-center">{pkg.eta ? moment(new Date(pkg.eta)).format('MMMM Do YYYY, h:mm:ss a') : '—'}</td>
+              <td className="px-4 py-2 text-center border border-black">{pkg.package_id}</td>
+              <td className="px-4 py-2 border border-black text-center">{pkg.current_status}</td>
+             <td className="px-4 py-2 border border-black text-center">
+  {moment.utc(pkg.last_updated).local().fromNow()}
+</td>
+
+              <td className="px-4 py-2 border border-black text-center">{pkg.lat && pkg.lon ? `${pkg.lat}, ${pkg.lon}` : '—'}</td>
+              <td className="px-4 py-2 border border-black text-center">
+                {pkg.eta ? moment.utc(pkg.eta).local().format('MMMM Do YYYY, h:mm:ss a') : '—'}
+
+              </td>
             </tr>
           ))}
         </tbody>

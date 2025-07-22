@@ -52,5 +52,6 @@ if (!lastAlert) {
 }
 
 export function startAlertCron(io: Server) {
-  cron.schedule('*/5 * * * * ', () => checkStuckPackages(io));
+  cron.schedule('*/30 * * * * ', 
+    () => checkStuckPackages(io));
 }

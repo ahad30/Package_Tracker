@@ -1,4 +1,4 @@
-import AlertBanner from '@/components/Common/Alert/AlertBanner';
+import AlertTable from '@/components/Common/Alert/AlertTable';
 import PackageDetail from '@/components/Common/Package/PackageDetail';
 import PackageList from '@/components/Common/Package/PackageList';
 import { Package } from '@/types';
@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Aamira Package Tracker</h1>
-      <AlertBanner />
+      <AlertTable />
       {selectedPackage ? (
         <PackageDetail packages={selectedPackage} onBack={() => setSelectedPackage(null)} />
       ) : (
