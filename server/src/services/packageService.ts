@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { PackageEventInput, Package, PackageStatus } from '../models/package';
+import { PackageEventInput, PackageStatus } from '../models/package';
 import { Package as PrismaPackage } from '@prisma/client';
 import { createHash } from 'crypto';
 import { io } from '../app';
+import { checkStuckPackages } from './alertService';
 
 const prisma = new PrismaClient();
 
@@ -72,6 +73,8 @@ export async function createPackageEvent(event: PackageEventInput) {
       note: event.note,
       eta: event.eta,
     });
+
+     await checkStuckPackages(io, event.package_id);
   }
 
   return { message: 'Event processed', event };

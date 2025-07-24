@@ -49,6 +49,7 @@ model Alert {
   package_id String
   message    String
   created_at DateTime
+  updated_at DateTime?
   resolved   Boolean  @default(false)
   package    Package  @relation(fields: [package_id], references: [package_id])
 }

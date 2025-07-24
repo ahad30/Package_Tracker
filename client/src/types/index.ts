@@ -36,5 +36,6 @@ export interface Alert {
   package_id: string;
   message: string;
   created_at: string;
+  updated_at?: string;
   resolved: boolean;
 }
