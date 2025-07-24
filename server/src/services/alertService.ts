@@ -54,9 +54,5 @@ export async function checkStuckPackages(io: Server, packageId?: string) {
 }
 
 export function startAlertCron(io: Server) {
-  cron.schedule('* * * * *', () => {
-   const now = new Date();
-    console.log(`🔁 Running cron at ${now.toISOString()}`);  
-    checkStuckPackages(io)
-  });
+  cron.schedule('* * * * *', () => {checkStuckPackages(io)});
 }
