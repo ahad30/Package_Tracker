@@ -9,7 +9,6 @@ const AlertTable: React.FC = () => {
 useEffect(() => {
     socket?.on('alert', (alert: Alert) => {
       setAlerts(prev => {
-        // If alert for this package_id already exists, update message instead of adding
         const exists = prev.find(a => a.package_id === alert.package_id && !a.resolved);
         if (exists) {
           return prev.map(a => a.package_id === alert.package_id ? alert : a);

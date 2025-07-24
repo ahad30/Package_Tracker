@@ -12,7 +12,7 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
   const socket = useSocket();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/v1/packages', {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/packages`, {
       method: 'GET',
       headers: { Authorization: 'Bearer aamira-secret-token' },
     })
@@ -57,7 +57,7 @@ const PackageList: React.FC<PackageListProps> = ({ onSelectPackage }) => {
           {packages.map(pkg => (
             <tr
               key={pkg.package_id}
-              className={`cursor-pointer ${new Date().getTime() - new Date(pkg.last_updated).getTime() > 30 * 60 * 1000 ? 'bg-red-400' : ''}`}
+              className={`cursor-pointer ${new Date().getTime() - new Date(pkg.last_updated).getTime() > 30 * 60 * 1000 ? 'bg-red-400 text-white' : ''}`}
               onClick={() => onSelectPackage(pkg)}
             >
               <td className="px-4 py-2 text-center border border-black">{pkg.package_id}</td>

@@ -13,7 +13,7 @@ const PackageDetail: React.FC<PackageDetailProps> = ({ packages, onBack }) => {
   const [events, setEvents] = useState<PackageEvent[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/packages/${packages.package_id}`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/packages/${packages.package_id}`, {
       method: "GET",
       headers: { Authorization: "Bearer aamira-secret-token" },
     })
