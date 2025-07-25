@@ -5,7 +5,7 @@ import cron from 'node-cron';
 
 const prisma = new PrismaClient();
 const STUCK_THRESHOLD_MINUTES = 30;
-const RE_ALERT_THRESHOLD_MINUTES = 1;
+const RE_ALERT_THRESHOLD_MINUTES = 30;
 
 export async function checkStuckPackages(io: Server, packageId?: string) {
   const whereClause = packageId
