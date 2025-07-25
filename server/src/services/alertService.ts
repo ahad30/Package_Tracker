@@ -7,12 +7,9 @@ const prisma = new PrismaClient();
 const STUCK_THRESHOLD_MINUTES = 30;
 const RE_ALERT_THRESHOLD_MINUTES = 30;
 
-export async function checkStuckPackages(io: Server, packageId?: string) {
-  const whereClause = packageId
-    ? { package_id: packageId, current_status: { notIn: [PackageStatus.DELIVERED, PackageStatus.CANCELLED] } }
-    : { current_status: { notIn: [PackageStatus.DELIVERED, PackageStatus.CANCELLED] } };
+export async function checkStuckPackages(io: Server) {
 
-  const packages = await prisma.package.findMany({ where: whereClause });
+const packages = await prisma.package.findMany({ where: { current_status: { notIn: [PackageStatus.DELIVERED, PackageStatus.CANCELLED] } } });
 
   const now = new Date();
 
@@ -43,7 +40,6 @@ export async function checkStuckPackages(io: Server, packageId?: string) {
             where: { id: lastAlert.id },
             data: {
               message: `Package ${pkg.package_id} still stuck for ${Math.floor(timeSinceUpdate)} minutes`,
-              created_at: now,
               updated_at: now,
             },
           });
@@ -55,5 +51,5 @@ export async function checkStuckPackages(io: Server, packageId?: string) {
 }
 
 export function startAlertCron(io: Server) {
-  cron.schedule('*/5 * * * *', () => checkStuckPackages(io));
+   setInterval(() => checkStuckPackages(io), 30 * 1000);
 }
