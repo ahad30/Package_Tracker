@@ -5,7 +5,7 @@ export function useSocket(): Socket | null {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:5000');
+    const newSocket = io('https://packagetracker-production.up.railway.app');
     setSocket(newSocket);
 
     return () => {
