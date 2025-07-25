@@ -10,7 +10,7 @@ A real-time package tracking system for couriers, featuring a REST API backend, 
 
 * **Courier Updates (F1)**: REST API to ingest package status updates, with idempotency and out-of-order handling.
 * **Persistent Storage (F2)**: MongoDB stores package state and event history, enabling reconstruction on restart.
-* **Real-Time Dashboard (F3)**: React UI showing active packages, status, location, ETA, and event timelines, updated via Socket.IO.
+* **Real-Time Dashboard (F3)**: React UI showing active packages, status, location, ETA, and event timelines, updated via Socket.IO.And also filtering and search implemented.
 * **Stuck Package Alerts (F4)**: Alerts for packages not updated in >30 minutes, displayed in the dashboard.
 * **Security (F5)**: Bearer token authentication for API endpoints.
 
@@ -193,4 +193,16 @@ client/
 ├── lib/                # Utility functions
 ├── pages/              # Page-level components for routing
 ```
+
+
+### Assumptions
+
+```
+Out-of-order events are stored but don't update current state if older than the latest event.
+ETA is provided by couriers; no computation implemented.
+Alerts are logged to MongoDB and displayed in the dashboard; checks start immediately after package creation/update with a setTimeout at 30 minutes and periodic node-cron checks every 30 minutes.
+Simple Bearer token for API security (sufficient for internal use).
+```
+
+
 

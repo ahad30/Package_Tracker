@@ -6,6 +6,7 @@ import { io } from '../app';
 import { checkStuckPackages } from './alertService';
 
 const prisma = new PrismaClient();
+const STUCK_THRESHOLD_MS = 30 * 60 * 1000;
 
 export async function createPackageEvent(event: PackageEventInput) {
   const eventHash = createHash('sha256')
@@ -89,6 +90,7 @@ export async function createPackageEvent(event: PackageEventInput) {
     });
 
     await checkStuckPackages(io, event.package_id);
+    setTimeout(() => checkStuckPackages(io, event.package_id), STUCK_THRESHOLD_MS);
   }
 
   return { message: 'Event processed', event };
