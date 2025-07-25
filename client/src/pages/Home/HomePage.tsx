@@ -9,8 +9,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 space-y-5">
-      <h1 className="text-2xl font-bold mb-4 text-center">Aamira Package Tracker</h1>
-      <p className="mb-8 text-center">Track and manage your packages efficiently.</p>
+      {/* <h1 className="text-2xl font-bold mb-4 text-center">Aamira Package Tracker</h1>
+      <p className="mb-8 text-center">Track and manage your packages efficiently.</p> */}
       {selectedPackage ? (
         <PackageDetail packages={selectedPackage} onBack={() => setSelectedPackage(null)} />
       ) : (

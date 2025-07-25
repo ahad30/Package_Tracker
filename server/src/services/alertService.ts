@@ -37,12 +37,13 @@ export async function checkStuckPackages(io: Server, packageId?: string) {
         });
         io.emit('alert', alert);
       } else {
-        const timeSinceLastAlert = (now.getTime() - new Date(lastAlert.updated_at || lastAlert.created_at).getTime()) / (1000 * 60);
+         const timeSinceLastAlert = (now.getTime() - new Date(lastAlert.created_at).getTime()) / (1000 * 60);
         if (timeSinceLastAlert >= RE_ALERT_THRESHOLD_MINUTES) {
           const updatedAlert = await prisma.alert.update({
             where: { id: lastAlert.id },
             data: {
               message: `Package ${pkg.package_id} still stuck for ${Math.floor(timeSinceUpdate)} minutes`,
+              created_at: now,
               updated_at: now,
             },
           });
@@ -54,5 +55,5 @@ export async function checkStuckPackages(io: Server, packageId?: string) {
 }
 
 export function startAlertCron(io: Server) {
-  cron.schedule('* * * * *', () => {checkStuckPackages(io)});
+  cron.schedule('*/5 * * * *', () => checkStuckPackages(io));
 }
