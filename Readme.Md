@@ -195,14 +195,20 @@ client/
 ```
 
 
+Here's the **converted and properly formatted version** of your `### Assumptions` section for GitHub (without changing any text), using a Markdown list for better clarity:
+
+---
+
 ### Assumptions
 
-```
-Out-of-order events are stored but don't update current state if older than the latest event.
-ETA is provided by couriers; no computation implemented.
-Alerts are logged to MongoDB and displayed in the dashboard; checks start immediately after package creation/update with a setTimeout at 30 minutes and periodic node-cron checks every 30 minutes.
-Simple Bearer token for API security (sufficient for internal use).
-```
+* Out-of-order events are stored but don't update current state if older than the latest event.
+* ETA is provided by couriers; no computation implemented.
+* Alerts are logged to MongoDB and displayed in the dashboard; checks start immediately after package creation/update with a `setTimeout` at 30 minutes and periodic `node-cron` checks every 30 minutes.
+* Simple Bearer token for API security (sufficient for internal use).
+
+---
+
+
 
 
 
