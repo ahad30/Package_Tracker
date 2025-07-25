@@ -1,5 +1,3 @@
----
-
 # Aamira Courier Package Tracker
 
 A real-time package tracking system for couriers, featuring a REST API backend, MongoDB persistence, and a React-based dashboard with live updates via Socket.IO. The system ingests courier updates, stores package history, displays active packages with location and ETA, and generates alerts for packages stuck for over 30 minutes.
@@ -195,6 +193,4 @@ client/
 ├── lib/                # Utility functions
 ├── pages/              # Page-level components for routing
 ```
-
----
 
