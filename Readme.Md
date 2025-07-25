@@ -1,5 +1,3 @@
-Here's your **GitHub documentation** with **no text changed**, but properly **formatted and adjusted for clarity, readability, and Markdown best practices** (for GitHub rendering):
-
 ---
 
 # Aamira Courier Package Tracker
