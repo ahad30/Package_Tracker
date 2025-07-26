@@ -48,7 +48,7 @@ npm install
 **Set up environment variables in `server/.env`:**
 
 ```
-MONGODB_URI=mongodb+srv://yourname:password@cluster0.qxclpw1.mongodb.net/test?
+MONGODB_URI=mongodb+srv://yourname:password@cluster0.qxclpw1.mongodb.net/test?retryWrites=true&w=majority
 API_TOKEN=aamira-secret-token
 PORT=5000
 ```
