@@ -201,9 +201,14 @@ Here's the **converted and properly formatted version** of your `### Assumptions
 
 ### Assumptions
 
+* Dispatchers for now have to create or update Package or Package Events   by using testing tool like postman.Used upsert in backend to handle package create and update which is ok for demo use. 
+
 * Out-of-order events are stored but don't update current state if older than the latest event.
+
 * ETA is provided by couriers; no computation implemented.
-* Alerts are logged to MongoDB and displayed in the dashboard; checks start immediately after package creation/update with a `setTimeout` at 30 minutes and periodic `node-cron` checks every 30 minutes.
+
+* Alerts are logged to MongoDB and displayed in the dashboard; checks start immediately after package creation/update with a `setTimeout` at 30 minutes and periodic `node-cron` checks every 1 minutes.
+
 * Simple Bearer token for API security (sufficient for internal use).
 
 ---
