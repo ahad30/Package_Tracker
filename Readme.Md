@@ -201,7 +201,7 @@ Here's the **converted and properly formatted version** of your `### Assumptions
 
 ### Assumptions
 
-* Dispatchers for now have to create or update Package or Package Events   by using testing tool like postman.Used upsert in backend to handle package create and update which is ok for demo use. 
+* Couriers for now have to create or update Package  by using testing tool like postman.Used upsert in backend to handle package create and update which is ok for demo use but not ideal for production. 
 
 * Out-of-order events are stored but don't update current state if older than the latest event.
 
